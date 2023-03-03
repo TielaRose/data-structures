@@ -1,5 +1,7 @@
 """Functions to parse a file containing villager data."""
 
+filename = 'villagers.csv'
+
 
 def all_species(filename):
     """Return a set of unique species in the given file.
@@ -56,11 +58,7 @@ def get_villagers_by_species(filename, search_string="All"):
 
         # output villagers = ['antonio', 'cyrano', 'pango']
 
-    print(sorted(villagers))
     return sorted(villagers)
-
-
-get_villagers_by_species('villagers.csv', search_string="bear")
 
 
 def all_names_by_hobby(filename):
@@ -73,9 +71,36 @@ def all_names_by_hobby(filename):
         - list[list[str]]: a list of lists containing names
     """
 
-    # TODO: replace this with your code
+    file = open(filename)
 
-    return []
+    # Initialize an empty list of empty lists for each hobby
+    fitness, nature, education, music, fashion, play = [], [], [], [], [], []
+
+    # Iterate over each line of the file
+    for line in file:
+        line = line.rstrip()  # Remove the whitespace from each line
+        villager = line.split('|')  # Split the line into a list of strings
+
+        # Assign meaningful variable names for name and hobby
+        villager_name = villager[0]
+        villager_hobby = villager[3]
+
+        # Look for their hobby, if their hobby is fitness, add them into that list
+        if villager_hobby == 'Fitness':
+            fitness.append(villager_name)
+        elif villager_hobby == 'Nature':
+            nature.append(villager_name)
+        elif villager_hobby == 'Education':
+            education.append(villager_name)
+        elif villager_hobby == 'Music':
+            music.append(villager_name)
+        elif villager_hobby == 'Fashion':
+            fashion.append(villager_name)
+        elif villager_hobby == 'Play':
+            play.append(villager_name)
+
+    # Return a list of each sublist of names by hobby
+    return [fitness, education, nature, music, fashion, play]
 
 
 def all_data(filename):
