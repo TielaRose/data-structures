@@ -10,10 +10,17 @@ def all_species(filename):
     Return:
         - set[str]: a set of strings
     """
+    file = open(filename)  # Open the file
 
     species = set()
 
-    # TODO: replace this with your code
+    # Iterate over each line in the file
+    for line in file:
+        line = line.rstrip()  # Remove trailing whitespace from each line
+        villager = line.split('|')  # Create a list of strings
+
+        # Add each species to the species set
+        species.add(villager[1])
 
     return species
 
