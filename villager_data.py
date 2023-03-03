@@ -35,12 +35,32 @@ def get_villagers_by_species(filename, search_string="All"):
     Return:
         - list[str]: a list of names
     """
+    search_string = search_string.title()
+
+    file = open(filename)  # Open the file
 
     villagers = []
 
-    # TODO: replace this with your code
+    # Iterate over each line in the file
+    for line in file:
+        line = line.rstrip()  # Remove trailing whitespace from each line
+        villager = line.split('|')  # Create a list of strings
 
+        # assign variable for names and species
+        villager_name = villager[0]
+        villager_species = villager[1]
+
+        # if species matches or we search for all species, add name to list
+        if search_string == "All" or search_string == villager_species:
+            villagers.append(villager_name)
+
+        # output villagers = ['antonio', 'cyrano', 'pango']
+
+    print(sorted(villagers))
     return sorted(villagers)
+
+
+get_villagers_by_species('villagers.csv', search_string="bear")
 
 
 def all_names_by_hobby(filename):
