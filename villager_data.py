@@ -49,8 +49,8 @@ def get_villagers_by_species(filename, search_string="All"):
         villager = line.split('|')  # Create a list of strings
 
         # assign variable for names and species
-        villager_name = villager[0]
-        villager_species = villager[1]
+        villager_name, villager_species = villager[0], villager[1]
+        # villager_species = villager[1]
 
         # if species matches or we search for all species, add name to list
         if search_string == "All" or search_string == villager_species:
@@ -73,11 +73,13 @@ def all_names_by_hobby(filename):
 
     file = open(filename)
 
-    # Initialize an empty list of empty lists for each hobby
+    # Initialize an empty list for each hobby
+    # hobbies = { 'fitness': [], 'nature': [], 'education': [], 'music': : [], 'fashion': : [], 'play': []}
     fitness, nature, education, music, fashion, play = [], [], [], [], [], []
 
     # Iterate over each line of the file
     for line in file:
+        # villager_name, _, _, villager_hobby, _ = line.rstrip().split()
         line = line.rstrip()  # Remove the whitespace from each line
         villager = line.split('|')  # Split the line into a list of strings
 
@@ -86,6 +88,7 @@ def all_names_by_hobby(filename):
         villager_hobby = villager[3]
 
         # Look for their hobby, if their hobby is fitness, add them into that list
+        # hobbies[villager_hobby.lower()] = villager_name
         if villager_hobby == 'Fitness':
             fitness.append(villager_name)
         elif villager_hobby == 'Nature':
@@ -100,6 +103,7 @@ def all_names_by_hobby(filename):
             play.append(villager_name)
 
     # Return a list of each sublist of names by hobby
+    # return list(hobbies.values())
     return [fitness, education, nature, music, fashion, play]
 
 
