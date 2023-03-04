@@ -110,7 +110,16 @@ def all_data(filename):
 
     all_data = []
 
-    # TODO: replace this with your code
+    # Open the file
+    file = open(filename)
+
+    # Iterate over each line of the file
+    for line in file:
+        # Remove trailiing whitespace, create a list of strings, make it a tuple
+        villager_tuple = tuple(line.rstrip().split('|'))
+
+        # Append the villager to the all_data list
+        all_data.append(villager_tuple)
 
     return all_data
 
