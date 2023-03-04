@@ -169,4 +169,31 @@ def find_likeminded_villagers(filename, villager_name):
         {'Bella', ..., 'Carmen'}
     """
 
-    # TODO: replace this with your code
+    # Initialize an empty dictionary of personalities, an empty string for the target personality
+    villagers_by_personality = {}
+    target_personality = ''
+
+    # Open the file
+    file = open(filename)
+
+    # Iterate over each line of the file
+    for line in file:
+        # Strip the trailing whitespace, split the line into a list of strings
+        villager = line.rstrip().split('|')
+
+        # Set variables for name and personality
+        name = villager[0]
+        personality = villager[2]
+
+        # Check if that personality is already a key in the dictionary. Add it the existing list, or creat a new key/list
+        if personality in villagers_by_personality.keys():
+            villagers_by_personality[personality].add(
+                name)
+        else:
+            villagers_by_personality[personality] = {name}
+
+        # Check if this is the given villager. If so, rememeber their personality
+        if name == villager_name:
+            target_personality = personality
+
+    return villagers_by_personality[target_personality]
